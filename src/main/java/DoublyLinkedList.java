@@ -32,23 +32,107 @@ class DoublyLinkedList {
     }
 
     public void insertBefore(Node node, Node nodeToInsert) {
-        // Write your code here.
+        if(nodeToInsert.next != null || nodeToInsert.prev != null) {
+            this.remove(nodeToInsert);
+        }
+
+        if(node.prev == null) {
+            node.prev = nodeToInsert;
+            nodeToInsert.next = node;
+            head = nodeToInsert;
+            length++;
+            return;
+        }
+
+        nodeToInsert.prev = node.prev;
+        nodeToInsert.next = nodeToInsert.prev.next;
+        nodeToInsert.prev.next = nodeToInsert;
+        nodeToInsert.next.prev = nodeToInsert;
+        length++;
     }
 
     public void insertAfter(Node node, Node nodeToInsert) {
-        // Write your code here.
+        if(nodeToInsert.next != null || nodeToInsert.prev != null) {
+            this.remove(nodeToInsert);
+        }
+
+        if(node.next == null) {
+            node.next = nodeToInsert;
+            nodeToInsert.prev = node;
+            tail = nodeToInsert;
+            length++;
+            return;
+        }
+
+        nodeToInsert.next = node.next;
+        node.next = nodeToInsert;
+        nodeToInsert.prev = node;
+        nodeToInsert.next.prev = nodeToInsert;
+        length++;
     }
 
     public void insertAtPosition(int position, Node nodeToInsert) {
-        // Write your code here.
+        if(this.isEmpty() || position == 1){
+            this.setHead(nodeToInsert);
+            return;
+        }
+
+        Node currNode = head;
+        for(int i = 0; i < position - 1; i++) {
+            if(currNode.next == null){
+                this.insertAfter(currNode, nodeToInsert);
+                return;
+            }
+            currNode = currNode.next;
+        }
+
+        this.insertBefore(currNode, nodeToInsert);
+        length++;
     }
 
     public void removeNodesWithValue(int value) {
-        // Write your code here.
+        Node currNode = head;
+        Node nextNode;
+
+        do {
+            nextNode = currNode.next;
+            if(currNode.value == value) {
+                remove(currNode);
+            }
+
+            currNode = nextNode;
+        } while (currNode != null);
     }
 
     public void remove(Node node) {
-        // Write your code here.
+        if(length == 1) {
+            head = null;
+            tail = null;
+            length--;
+            return;
+        }
+
+        if(node.prev == null) {
+            head = node.next;
+            head.prev = null;
+            node.next = null;
+            length--;
+            return;
+        }
+
+        if(node.next == null) {
+            tail = node.prev;
+            tail.next = null;
+            node.prev = null;
+            length--;
+            return;
+        }
+
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
+        node.next = null;
+        node.prev = null;
+        length--;
     }
 
     public boolean containsNodeWithValue(int value) {
@@ -82,12 +166,20 @@ class DoublyLinkedList {
         return length;
     }
 
-    public int head() {
+    public int headValue() {
         return this.head.value;
     }
 
-    public int tail() {
+    public int tailValue() {
         return this.tail.value;
+    }
+
+    public Node headNode() {
+        return this.head;
+    }
+
+    public Node tailNode() {
+        return this.tail;
     }
 
     static class Node {
