@@ -6,18 +6,18 @@ package algoExpert.binarySearch;
  */
 public class BinarySearch {
     public static int binarySearch(int[] array, int target) {
-        int i = 0;
-        int m = 0;
-        int j = array.length - 1;
+        int lowPointer = 0;
+        int middlePointer = 0;
+        int highPointer = array.length - 1;
 
-        while(i <= j) {
-            m = (i + j) / 2;
-            if(array[m] == target) {
-                return m;
-            } else if(array[m] > target) {
-                j = m - 1;
+        while(lowPointer <= highPointer) {
+            middlePointer = (lowPointer + highPointer) / 2;
+            if(array[middlePointer] == target) {
+                return middlePointer;
+            } else if(array[middlePointer] > target) {
+                highPointer = middlePointer - 1;
             } else {
-                i = m + 1;
+                lowPointer = middlePointer + 1;
             }
         }
 
