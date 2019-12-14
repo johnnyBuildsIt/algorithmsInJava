@@ -1,6 +1,6 @@
 class DoublyLinkedList {
-    private Node head;
-    private Node tail;
+    public Node head;
+    public Node tail;
     private int length = 0;
 
     public void setHead(Node node) {
@@ -72,6 +72,10 @@ class DoublyLinkedList {
     }
 
     public void insertAtPosition(int position, Node nodeToInsert) {
+        if(nodeToInsert.next != null || nodeToInsert.prev != null) {
+            this.remove(nodeToInsert);
+        }
+
         if(this.isEmpty() || position == 1){
             this.setHead(nodeToInsert);
             return;
