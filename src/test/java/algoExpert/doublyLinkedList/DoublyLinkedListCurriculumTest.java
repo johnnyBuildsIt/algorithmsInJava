@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DoublyLinkedListAlgoExpertTest {
+public class DoublyLinkedListCurriculumTest {
     private void expectEmpty(DoublyLinkedList linkedList) {
         assertTrue(linkedList.head == null);
         assertTrue(linkedList.tail == null);

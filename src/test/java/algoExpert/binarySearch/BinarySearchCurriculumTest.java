@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static algoExpert.binarySearch.BinarySearch.binarySearch;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class BinarySearchAlgoExpertTest {
+public class BinarySearchCurriculumTest {
     @Test
     public void TestCase1() {
         assertTrue(binarySearch(new int[] {1, 5, 23, 111}, 111) == 3);
