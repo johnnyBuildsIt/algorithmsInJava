@@ -1,3 +1,5 @@
+package algoExpert.doublyLinkedList;
+
 class DoublyLinkedList {
     public Node head;
     public Node tail;
